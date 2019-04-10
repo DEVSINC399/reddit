@@ -1,16 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="page-header">
+  <h1>
+    <a href="<%= @link.url %>"><%= @link.title %></a><br>
+    <small>Submitted by <%= @link.user.email %></small>
+  </h1>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @link.title %>
-</p>
+<div class="btn-group">
+  <%= link_to 'Visit URL', @link.url, class: "btn btn-primary" %>
+</div>
 
-<p>
-  <strong>Url:</strong>
-  <%= @link.url %>
-</p>
+<div class="btn-group">
+  <% if current_user == @link.user %>
+    <%= link_to 'Edit', edit_link_path(@link), class: 'btn btn-default' %>
+    <%= link_to 'Destroy', @link, method: :delete, data: { confirm: "Are you sure to delete the link?" }, class: 'btn btn-default' %>
+  <% end %>
+  <%
+=begin%>
+ <%= link_to 'Back', links_path %> 
+<%
+=end%>
+</div>
 
-<% if current_user == @link.user %>
-  <%= link_to 'Edit', edit_link_path(@link) %> | 
-<% end %>
-<%= link_to 'Back', links_path %>
